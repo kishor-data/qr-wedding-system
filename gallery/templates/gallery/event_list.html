@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wedding Events</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf6f0;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #c94f7c;
+            margin-bottom: 30px;
+        }
+
+        .event-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .event-card h2 {
+            color: #c94f7c;
+        }
+
+        .event-date {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #c94f7c, #ff7aa2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .no-event {
+            margin-top: 50px;
+            color: #777;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Wedding Events</h1>
+
+    <div class="event-container">
+        {% for event in events %}
+            <div class="event-card">
+                <h2>{{ event.event_name }}</h2>
+                <p class="event-date">Date: {{ event.event_date }}</p>
+
+                <a href="{% url 'event_detail' event.id %}" class="view-btn">
+                    View Gallery
+                </a>
+            </div>
+        {% empty %}
+            <p class="no-event">No events available yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
