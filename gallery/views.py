@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Event, EventImage
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from .models import Event
 
 
 def event_list(request):
@@ -11,12 +13,20 @@ def event_detail(request, id):
     event = get_object_or_404(Event, id=id)
 
     if request.method == "POST":
-        image_file = request.FILES.get("image")
-        if image_file:
-            EventImage.objects.create(
-                event=event,
-                image=image_file
-            )
-            return redirect("event_detail", id=event.id)
+        image = request.FILES.get("image")
+        if image:
+            event.images.create(image=image)
 
     return render(request, "gallery/event_detail.html", {"event": event})
+
+
+# 🔥 Temporary admin creator
+def create_admin(request):
+    if not User.objects.filter(username="kishore").exists():
+        User.objects.create_superuser(
+            "kishore",
+            "pavandhandru587@gmail.com",
+            "kishore@123"
+        )
+        return HttpResponse("Admin created successfully")
+    return HttpResponse("Admin already exists")
