@@ -20,3 +20,14 @@ def event_detail(request, id):
     return render(request, "gallery/event_detail.html", {"event": event})
 
 
+def create_admin(request):
+    if not User.objects.filter(username="kishore").exists():
+        User.objects.create_superuser(
+            "kishore",
+            "pavandhandru587@gmail.com",
+            "kishore@123"
+        )
+        return HttpResponse("Admin created successfully")
+    return HttpResponse("Admin already exists")
+
+
