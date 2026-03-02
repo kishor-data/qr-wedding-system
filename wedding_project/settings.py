@@ -27,7 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    "https://qr-wedding-system.onrender.com"
+    "https://qr-wedding-system.onrender.com",
 ]
 
 
