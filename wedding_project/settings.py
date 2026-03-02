@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-a)=i%-qc=ug=zj7a^u#@iglu=d+!85(fo!(i9p1u4141@^ttv8
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    "https://qr-wedding-system.onrender.com"
+]
 
 
 # Application definition
